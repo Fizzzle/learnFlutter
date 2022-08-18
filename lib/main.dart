@@ -1,40 +1,55 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const CounterWidget());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class CounterWidget extends StatefulWidget {
+  const CounterWidget({super.key});
+
+  @override
+  State<CounterWidget> createState() => _CounterWidgetState();
+}
+
+class _CounterWidgetState extends State<CounterWidget> {
+  int _counter = 50;
+
+  @override
+  void initState() {
+    _counter = 50;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(fontFamily: 'IndieFlower'),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Adding Assets'),
-          centerTitle: true,
-        ),
         body: Center(
-          child: Stack(
-            fit: StackFit.expand,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Image(
-                image: AssetImage('assets/images/bg.jpg'),
+              Text('Tap "-" to decrement'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _counter -= 1;
+                        });
+                      },
+                      icon: Icon(Icons.accessible_forward)),
+                  Text('${_counter}', style: TextStyle(fontSize: 30)),
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _counter += 1;
+                        });
+                      },
+                      icon: Icon(Icons.plus_one)),
+                ],
               ),
-              Image.asset('assets/icons/pngwing.com.png'),
-              Positioned(
-                top: 130,
-                right: 50,
-                child: Text(
-                  'Hello Im Viktor ',
-                  style: TextStyle(
-                    fontSize: 30,
-                    color: Colors.red,
-                  ),
-                ),
-              ),
+              Text('Tap "+" to increment')
             ],
           ),
         ),
