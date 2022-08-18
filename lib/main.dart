@@ -10,18 +10,31 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'IndieFlower'),
       home: Scaffold(
         appBar: AppBar(
           title: Text('Adding Assets'),
+          centerTitle: true,
         ),
         body: Center(
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Image(
+              const Image(
                 image: AssetImage('assets/images/bg.jpg'),
               ),
               Image.asset('assets/icons/pngwing.com.png'),
+              Positioned(
+                top: 130,
+                right: 50,
+                child: Text(
+                  'Hello Im Viktor ',
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
